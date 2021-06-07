@@ -1,0 +1,47 @@
+﻿@using YurtLife.Models
+@model UserCardInfo
+@{Html.RenderPartial("ProductDetail", Model.Product);}
+@{
+    var currentCustomer = (Customer)Session["loginkey"];
+}
+<div class="saleForm" style=" float:left !important; ">
+    @using (Html.BeginForm())
+    {
+        var monthList = new List<int>();
+        for (var i = 1; i <= 12; i++)
+        {
+            monthList.Add(i);
+        }
+        var yearList = new List<int>();
+        for (var i = 2015; i <= 2030; i++)
+        {
+            yearList.Add(i);
+        }
+        @Html.HiddenFor(d => d.Product.Id)
+        <div>
+            @Html.Label("Kart Numarası")
+            @Html.TextBoxFor(d => d.CardNumber)
+            @Html.ValidationMessageFor(d => d.CardNumber)
+        </div>
+        <div>
+            @Html.Label("Cv2 No")
+            @Html.TextBox("SecurityNumber")
+        </div>
+        <div>
+            @Html.Label("Kart Sahibi")
+            @Html.TextBox("CardHasName")
+        </div>
+        <div>
+            @Html.Label("SKT Ay")
+            @Html.DropDownList("ExpYear", new SelectList(monthList))
+        </div>
+        <div>
+            @Html.Label("SKT Yıl")
+            @Html.DropDownList("ExpMonth", new SelectList(yearList))
+        </div>
+        <div>
+            <input type="submit" value="Ödemeyi Gerçekleştir" />
+        </div>
+
+    }
+</div>

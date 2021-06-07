@@ -1,0 +1,27 @@
+﻿@model YurtLife.Models.Product
+
+<div class="image">
+    <a href="#"><img src="@Model.ImageUrl" alt="@Model.Id" style="width:200px !important;" /></a>
+</div>
+<div class="text">
+    <p>
+        <div>
+            <b>Yurt Adı: </b><span>@Model.YurtAdı</span>
+        </div>
+        <div>
+            <b>Oda Kapasitesi: </b><span>@Model.OdaKapasite</span>
+        </div>
+        <div>
+            <b>Açıklama: </b><span>@Model.Açıklama </span >
+        </div>
+        <div>
+            <b>Aylık Fiyat:</b> <span>@Model.Fiyat ₺ </span>
+        </div>
+        <div>
+            <b>Adres:</b> <span>@Model.Adres </span>
+        </div>
+        <div>
+            <b>Telefon Numarası:</b> <span>@Model.TelNo </span>
+        </div>
+    </p>
+</div>

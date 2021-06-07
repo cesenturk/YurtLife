@@ -1,0 +1,31 @@
+﻿@using YurtLife.Models
+@{ 
+    var loginCustomer = Session["LoginKey"] as Customer;
+}
+
+
+<div class="options">
+    <div class="search">
+        <form action="@Url.Action("Index", "Product")" method="get">
+            <span class="field">
+            <input type="text" name="SearchString" id="SearchString" title="Arama" value="@Request.Params["SearchString"]"/></span>
+            <input type="submit" class="search-submit" value="Ara" />
+        </form>
+    </div>
+
+    <div class="right">
+        @if (loginCustomer == null)
+        {
+
+            <span class="left more-links "><a href="@Url.Action("Login", "Login")">Giriş Yap</a></span>
+
+        }
+        else
+        {
+            <span class="left more-links"><a href="@Url.Action("Index","My")">@loginCustomer.FullName</a></span>
+            <span class="left more-links "><a href="@Url.Action("LogOut", "LogOut")">Çıkış Yap</a></span>
+        }
+
+
+    </div>
+</div>

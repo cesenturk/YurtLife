@@ -1,0 +1,91 @@
+﻿@using YurtLife.Models
+@{ var sale = (IList<Sale>)ViewBag.Sale;
+    var ReservedProduct = (IList<Product>)ViewBag.ReservedProduct;
+}
+
+@if (sale.Count != 0)
+{
+
+    <h3 style="height: 20px; border-bottom: 1px solid #f3f3f3;">Kayıtlarım</h3>
+    <table class="sale-productList">
+
+        <tr>
+            <th>Kayıt No</th>
+            <th>Yurt Adı</th>
+            <th>Fiyat</th>
+            <th>Durum</th>
+            <th>Seçenekler</th>
+        </tr>
+        @foreach (var item in sale)
+        {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+
+                <td>
+                    @item.Product.YurtAdı
+                </td>
+
+                <td>
+                    @item.Product.Fiyat₺
+                </td>
+
+                <td>
+
+                    @{
+                        /*
+                        Ön kayıt talebi yurt tarafından onaylanmalıdır.
+                        Hangi kurumun onayının daha öncelikli olması gerektiği
+                        konusunda banka ile yurt arasında bir ikilem mevcut.
+                        */
+
+                        if (item.SaleState == (short)SaleState.Check)
+                        {<abbr>Yurt tarafından yanıt bekleniyor</abbr> }
+                        else if ((item.SaleState == (short)SaleState.IsAccepted))
+                        {<abbr>Banka tarafından onay bekleniyor</abbr>}
+                        else if ((item.SaleState == (short)SaleState.Completed))
+                        {<abbr>Kayıt tamamlandı</abbr>}
+                        else if ((item.SaleState == (short)SaleState.Cancel))
+                        {<abbr>Kayıt iptal edildi</abbr>}
+                    }
+                </td>
+
+
+                <th><a href="@Url.Action("DeleteSale", "Sale", new { id = item.ProductId })">İptal Et</a></th>
+
+
+
+            </tr>
+        }
+    </table>
+}
+
+@if (ReservedProduct.Count != 0)  /*Favorilere eklenmiş yurt ve apartlar*/
+{
+    <h3 style="height: 20px; border-bottom: 1px solid #f3f3f3;">Favorilerim</h3>
+    <div class="tab-content" style="display:block;float:left;">
+        <div class="items" style="width: 750px !important;">
+            <div class="cl">&nbsp;</div>
+            <ul>
+
+                @foreach (var item in ReservedProduct)
+                {
+                    <li>
+
+                        @{Html.RenderPartial("SimpleProduct", item);}
+
+                        <div>
+                            <a href="@Url.Action("Sale", "Sale", new {id=item.Id })">Ön Kayıt</a>
+                        </div>
+                        <div>
+                            <a href="@Url.Action("RemoveReservation", "My", new { id=item.Id })">Favorilerimden Çıkar</a>
+                        </div>
+                    </li>}
+
+            </ul>
+            <div class="cl">&nbsp;</div>
+        </div>
+    </div>
+}
+

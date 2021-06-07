@@ -1,0 +1,113 @@
+﻿@{Layout = null;}
+@using YurtLife.Models
+@model HomeVm
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    @{Html.RenderPartial("HeadContent");}
+
+</head>
+<body>
+    <!-- Top -->
+    <div id="top">
+
+        <div class="shell">
+
+            <!-- Header -->
+            <div id="header">
+                <h1 class="text-hide" style="width: 10px; height: 10px;"><a href="@Url.Action("Index", "Home")"><img src="~/Content/wing_the_air_free/html/css/images/logo22.gif" /></a></h1>
+                @{Html.RenderPartial("Navigation");}
+            </div>
+            <!-- End Header -->
+            <!-- Slider -->
+            <div id="slider">
+                <div id="slider-holder">
+                    <ul>
+                        <li><a href="@Url.Action("Index", "Product")"><img src="~/Content/wing_the_air_free/html/css/images/aslider0.jpg" alt="" /></a></li>
+                        <li><a href="@Url.Action("Index", "Product")"><img src="~/Content/wing_the_air_free/html/css/images/aslider1.jpg" alt="" /></a></li>
+                        <li><a href="@Url.Action("Index", "Product")"><img src="~/Content/wing_the_air_free/html/css/images/aslider0.jpg" alt="" /></a></li>
+                        <li><a href="@Url.Action("Index", "Product")"><img src="~/Content/wing_the_air_free/html/css/images/aslider1.jpg" alt="" /></a></li>
+                        <li><a href="@Url.Action("Index", "Product")"><img src="~/Content/wing_the_air_free/html/css/images/aslider0.jpg" alt="" /></a></li>
+                        <li><a href="@Url.Action("Index", "Product")"><img src="~/Content/wing_the_air_free/html/css/images/aslider1.jpg" alt="" /></a></li>
+                    </ul>
+                </div>
+                <div id="slider-nav">
+                    <a href="#" class="prev">Geri</a>
+                    <a href="#" class="next">İleri</a>
+                </div>
+            </div>
+            <!-- End Slider -->
+
+        </div>
+    </div>
+    <!-- Top -->
+    <!-- Main -->
+    <div id="main">
+        <div class="shell">
+
+            <!-- Search, etc -->
+            @{Html.RenderPartial("Options");}
+            <!-- End Search, etc -->
+            <!-- Content -->
+            <div id="content">
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    @{Html.RenderPartial("CategoryList");}
+                </div>
+                <!-- Tabs -->
+                <!-- Container -->
+                <div id="container">
+
+                    <div class="tabbed">
+                        <!-- First Tab Content -->
+                        @foreach (var category in ViewBag.CategoryList)
+                        {
+                            <div class="tab-content" style="display:block;float:left;">
+                                <div class="items">
+                                    <div class="cl">&nbsp;</div>
+                                    <ul>
+
+                                        @foreach (var item in Model.ProductList.Where(d => d.CategoryId == category.Id))
+                                        {
+                                            <li>
+                                                @{Html.RenderPartial("SimpleProduct", item);}
+                                                <div>
+                                                    <a href="@Url.Action("AddReservation", "My", new {id=item.Id })">Favorilere Ekle</a>
+                                                </div>
+                                                <div>
+                                                    <a href="@Url.Action("Sale", "Sale", new {id=item.Id })">Ön Kayıt</a>
+                                                </div>
+
+                                            </li>}
+
+                                    </ul>
+                                    <div class="cl">&nbsp;</div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+
+                    <!-- Brands -->
+                    @{Html.RenderPartial("BrandList"); }
+                    <!-- End Brands -->
+                    <!-- Footer -->
+                    @{Html.RenderPartial("Footer"); }
+                    <!-- End Footer -->
+
+                </div>
+                <!-- End Container -->
+
+            </div>
+            <!-- End Content -->
+
+        </div>
+    </div>
+    <!-- End Main -->
+
+</body>
+</html>

@@ -1,0 +1,12 @@
+﻿@model YurtLife.Models.Product
+<div class="image">
+    <a href="@Url.Action("Detail", "Product", new { id = Model.Seo })"><img src="@Model.ImageUrl" alt="@Model.Id" /></a>
+</div>
+<p>
+    Yurt Adı: <span>@Model.YurtAdı</span><br/>
+    Oda Kapasitesi : <span>@Model.OdaKapasite</span><br/>
+    Kategori: <span>@Model.Kategori</span>
+
+
+</p>
+<p class="price">Aylık Fiyat: <strong>@Model.Fiyat ₺</strong></p>

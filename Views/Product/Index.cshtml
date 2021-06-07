@@ -1,0 +1,29 @@
+﻿@using YurtLife.Models
+@model IList<YurtLife.Models.Product>
+<h3 style="height: 20px; border-bottom: 1px solid #f3f3f3;">
+    @(string.IsNullOrEmpty(ViewBag.CategoryName) ? "" : ViewBag.CategoryName)
+</h3>
+
+<div class="tab-content" style="display:block;float:left;">
+    <div class="items" style="width: 750px !important;">
+        <div class="cl">&nbsp;</div>
+        <ul>
+
+            @foreach (var item in Model)
+            {
+                <li>
+                    @{Html.RenderPartial("SimpleProduct", item);}
+                    
+                    <div>
+                        <a href="@Url.Action("AddReservation", "My", new {id=item.Id })">Favorilere Ekle</a>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("Sale", "Product", new {id=item.Id })">Ön Kayıt</a>
+                    </div>
+                        
+                </li>}
+
+        </ul>
+        <div class="cl">&nbsp;</div>
+    </div>
+</div>

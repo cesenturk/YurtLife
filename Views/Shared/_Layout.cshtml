@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="~/Content/wing_the_air_free/html/css/Site.css" rel="stylesheet" type="text/css" />
+    @{Html.RenderPartial("HeadContent");}
+</head>
+<body>
+    <!-- Top -->
+    <div id="top" style="height: 80px !important;">
+
+        <div class="shell">
+
+            <!-- Header -->
+            <div id="header">
+                <h1 class="text-hide" style="width: 10px; height: 10px;"><a href="@Url.Action("Index", "Home")"><img src="~/Content/wing_the_air_free/html/css/images/logo22.gif" /></a></h1>
+                @{Html.RenderPartial("Navigation");}
+            </div>
+            <!-- End Header -->
+            <!-- Slider -->
+            
+            <!-- End Slider -->
+
+        </div>
+    </div>
+    <!-- Top -->
+    <!-- Main -->
+    <div id="main">
+        <div class="shell">
+
+            <!-- Search, etc -->
+            @{Html.RenderPartial("Options");}
+            
+            <!-- End Search, etc -->
+            <!-- Content -->
+            <div id="content">
+
+                <!-- Tabs -->
+               
+                <!-- Tabs -->
+                <!-- Container -->
+                <div id="container">
+
+                    <div class="categories">
+                        <h4>
+                            Kategoriler
+                        </h4>
+                        @{Html.RenderPartial("CategoryList");}
+
+                    </div>
+
+
+                    <div class="detail">
+                        @RenderBody()
+                    </div>
+                    <div class="clearfix">
+                    </div>
+
+                    <!-- Brands -->
+                    @{Html.RenderPartial("BrandList"); }
+                    <!-- End Brands -->
+                    <!-- Footer -->
+                    @{Html.RenderPartial("Footer"); }
+
+                    <!-- End Footer -->
+
+                </div>
+                <!-- End Container -->
+
+            </div>
+            <!-- End Content -->
+
+        </div>
+    </div>
+    <!-- End Main -->
+
+</body>
+</html>
